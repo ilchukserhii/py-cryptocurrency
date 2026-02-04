@@ -11,6 +11,14 @@ import app.main as main
         (1.06, "Buy more cryptocurrency")
     ]
 )
-def test_cryptocurrency_action(monkeypatch, exchange_rate: int | float, expected: str) -> None:
-    monkeypatch.setattr(main, "get_exchange_rate_prediction", lambda current_rate: current_rate * exchange_rate)
+def test_cryptocurrency_action(
+        monkeypatch: pytest.MonkeyPatch,
+        exchange_rate: int | float,
+        expected: str
+) -> None:
+    monkeypatch.setattr(
+        main,
+        "get_exchange_rate_prediction",
+        lambda current_rate: current_rate * exchange_rate
+    )
     assert main.cryptocurrency_action(100) == expected
